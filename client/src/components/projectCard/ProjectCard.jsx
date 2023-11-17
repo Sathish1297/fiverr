@@ -1,0 +1,23 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import './projectCard.scss'
+
+
+const ProjectCard = ({item}) => {
+  return (
+    <Link to="/project">
+      <div className='projectCard'>
+        <img src={item.img} alt="item" />
+        <div className="info">
+          <img src={item.pp} alt="" />
+          <div className="texts">
+            <h2>{item.cat}</h2>
+            <span>{item.username}</span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+export default ProjectCard

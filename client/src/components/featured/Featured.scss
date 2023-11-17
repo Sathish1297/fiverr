@@ -1,0 +1,104 @@
+.featured{
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    background-color: #013914;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+
+    .container{
+        width: 80%;
+        display: flex;
+        align-items: center;
+
+        .left{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 0px 170px 0px 0px;
+
+
+            h1{
+                font-size: 40px;
+                font-weight: 400;
+
+                span{
+                    font-style: italic;
+                    font-weight: 300;
+                }
+            }
+
+            .search{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                overflow: hidden;
+                border-radius: 5px;
+                background-color: white;
+
+                .searchInput{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    img{
+                        width: 20px;
+                        height: 20px;
+                        margin: 10px;
+                    }
+                    input{
+                        border: none;
+                        outline: none;
+
+                        &::placeholder{
+                            color: gray;
+                        }
+                    }
+                }
+
+                button{
+                    height: 40px;
+                    width: 80px;
+                    border: none;
+                    border-radius: 0px 5px 5px 0px;
+                    background-color: #1dbf73;
+                    color: white;
+                    cursor: pointer;
+                    align-self: flex-end;
+                }
+            }
+
+            .popular{
+                display: flex;
+                align-items: center;
+                gap: 15px;
+
+                span{
+                    width: max-content;
+                }
+
+                button{
+                    border: none;
+                    background-color: transparent;
+                    color: white;
+                    border: 1px solid white;
+                    border-radius: 20px;
+                    padding: 5px 10px;
+                    font-size: 12px;
+                    cursor: pointer;
+                    width: max-content;
+
+                }
+            }
+        }
+
+        .right{
+            height: 100%;
+            align-self: flex-end;
+            img{
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}

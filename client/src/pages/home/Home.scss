@@ -1,0 +1,113 @@
+.home{
+    .features{
+        display: flex;
+        justify-content: center;
+        background-color: #f1fdf7;
+        padding: 70px 0px;
+
+        &.dark{
+            background-color: #0d084d;
+            color: white;
+                    
+            h1{
+                color: white !important;
+                font-size: 40px;
+                i{
+                    color: #1dbf73;
+                }
+                span{
+                    font-size: 20px;
+                    font-weight: 300;
+                }
+            }
+            
+            h2{
+                color: white !important;
+            }
+            
+            p{
+                color: white !important;
+                font-size: 13px;
+                letter-spacing: 1px;
+                line-height: 23px;
+            }
+        
+            .title{
+                color: white !important;
+                font-size: 18px;
+                font-weight: 500;
+                
+                
+            }
+            
+            button{
+                margin-top: 20px;
+                background-color: #1dbf73;
+                border: none;
+                color: white;
+                font-size: 14px;
+                border-radius: 5px;
+                padding: 10px 20px;
+                max-width: max-content;
+                cursor: pointer;
+            }
+            
+            .image{
+                width: 100%;
+            }
+        }
+
+        .container{
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            gap: 200px;
+
+            .item{
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                &:first-child{
+                    flex: 2;
+                }
+
+                &:last-child{
+                    flex: 3;
+                }
+                
+                h1{
+                    font-weight: 500;
+                    margin-bottom: 10px;
+                }
+                .title{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-weight: 500;
+                    font-size: 18px;
+                    color: gray;
+
+                    img{
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+
+                p{
+                    font-weight: 300;
+                    font-size: 13px;
+                    color: gray;
+                    letter-spacing: 1px;
+                    line-height: 23px;
+                }
+
+                video{
+                    width: 570px;
+                    height: 430px;
+                }
+            }
+        }
+    }
+
+}
