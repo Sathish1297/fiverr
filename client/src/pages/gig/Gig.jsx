@@ -286,7 +286,7 @@ function Gig() {
                     </div>
                   </div>
                   <hr />
-                  <p>{dataUser.desc}</p>
+                  <p>{dataUser.desc || "There is no description about User"}</p>
                 </div>
               </div>
             )}
@@ -295,7 +295,7 @@ function Gig() {
           <div className="right">
             <div className="price">
               <h3>{data.shortTitle}</h3>
-              <h2>$ {data.price}</h2>
+              <h2>Rs {data.price}</h2>
             </div>
             <p>{data.shortDesc}</p>
             <div className="details">

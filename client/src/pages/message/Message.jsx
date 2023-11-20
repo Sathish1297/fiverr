@@ -1,57 +1,65 @@
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import newRequest from '../../utils/newRequest';
 import './Message.scss'
 
 function Message() {
+
+  const { id } = useParams();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const queryClient = useQueryClient()
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["messages"],
+    queryFn: () =>
+      newRequest
+        .get(`/messages/${id}`)
+        .then((res) => {
+          return res.data;
+        }),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (message) => {
+      return newRequest.post(`/messages`, message);
+    },
+    onSuccess:()=>{
+      queryClient.invalidateQueries(["messages"])
+    }
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutation.mutate({
+      conversationId: id,
+      desc: e.target[0].value,
+    })
+    e.target[0].value= "";
+  }
+
   return (
     <div className='message'>
       <div className="container">
         <span className="breadcrumbs">
           <Link to='/messages' className='link'>MESSAGES </Link>{'>'} JAYANTH {'>'}
         </span>
-        <div className="messages">
-          <div className="item">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Eaque necessitatibus eveniet provident, a accusantium excepturi quisquam, ea ullam doloribus sapiente corrupti voluptatum aperiam</p>
+        {isLoading ? "loading" : error ? "error" : (
+          <div className="messages">
+          { data?.map((m) => (
+            <div className={m.userId === currentUser._id ? "owner item" : "item"} key={m._id}>
+              <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
+              <p>{m.desc}</p>
+            </div>
+          ))}
           </div>
-          <div className="item">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque necessitatibus eveniet provident, a accusantium excepturi quisquam, ea ullam doloribus sapiente corrupti voluptatum aperiam! Voluptates cupiditate praesentium vero minima incidunt pariatur?</p>
-          </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque necessitatibus eveniet provident, a accusantium excepturi </p>
-          </div>
-          <div className="item">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>adipisicing elit. Eaque necessitatibus eveniet provident, a accusantium excepturi quisquam, ea ullam doloribus sapiente corrupti voluptatum aperiam! Voluptates cupiditate praesentium vero minima incidunt pariatur?</p>
-          </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque necessitatibus eveniet provident, a accusantium excepturi quisquam, ea ullam doloribus sapiente corrupti voluptatum aperiam! Voluptates cupiditate praesentium vero minima incidunt pariatur?</p>
-          </div>
-          <div className="item">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Eaque necessitatibus eveniet provident, a accusantium excepturi quisquam, ea ullam doloribus </p>
-          </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Lorem ipsum dolor, sit amet consecteturea ullam doloribus sapiente corrupti voluptatum aperiam! Voluptates cupiditate praesentium vero minima incidunt pariatur?</p>
-          </div>
-          <div className="item">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Lorem ipsum dolor, sit amet consecteturea ullam doloribus sapiente corrupti voluptatum aperiam! Voluptates cupiditate praesentium vero minima incidunt pariatur?</p>
-          </div>
-          <div className="item owner">
-            <img src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
-            <p>Consecteturea ullam doloribus sapiente corrupti voluptatum aperiam! Voluptates cupiditate praesentium vero minima incidunt pariatur?</p>
-          </div>
-        </div>
+        )}
         <hr />
-        <div className="write">
+        <form className="write" onSubmit={handleSubmit}>
           <textarea name="" placeholder='write a message...' id="" cols="30" rows="10"></textarea>
-          <button>Send</button>
-        </div>
+          <button type='submit'>Send</button>
+        </form>
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ import heart from '../../assets/heart.png'
 import noavatar from '../../assets/noavatar.jpg'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import newRequest from '../../utils/newRequest'
+import newRequest from '../../utils/newRequest.js'
 
 const GigCard = ({item}) => {
 
@@ -28,8 +28,8 @@ const GigCard = ({item}) => {
                  <div className="user">
                     <img src={data.img || noavatar}alt="" />
                     <span>{data.username}</span>
-                 </div> )
-                }
+                 </div> 
+                 )}
                 <p>{item.desc}</p>
                 <div className="star">
                     <img src={star} alt="star" />

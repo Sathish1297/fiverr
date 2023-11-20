@@ -34,7 +34,7 @@ function Messages() {
   });
 
   const handleRead = (id) => {
-
+    mutation.mutate(id);
   }
 
   return (

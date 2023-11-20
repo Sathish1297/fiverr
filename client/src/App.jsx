@@ -1,5 +1,4 @@
 import Navbar from "./components/navbar/Navbar"
-
 import Add from "./pages/add/Add"
 import Footer from "./components/footer/Footer";
 import Home from "./pages/home/Home"
@@ -18,6 +17,8 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
+import Pay from "./pages/pay/Pay";
+import Success from "./pages/success/Success";
 
 
 function App() {
@@ -45,9 +46,8 @@ function App() {
           path:"/",
           element: <Home />
         },
-
         {
-          path:"/Gig/:id",
+          path:"/gig/:id",
           element: <Gig/>
         },
         {
@@ -81,6 +81,14 @@ function App() {
         {
           path:"/login",
           element: <Login/>
+        },
+        {
+          path:"/pay/:id",
+          element: <Pay/>
+        },
+        {
+          path:"/success",
+          element: <Success/>
         },
       ]
     }
